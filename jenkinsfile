@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    tools {nodejs "node"}
+    stages {
+        stage ('clone repo') { //clone repo from github
+            steps{
+                git url: "https://github.com/Jesse-Richard/gallery.git", branch: "master"
+            }
+        }
+        stage ('Build') { //install npmpipeline {
+    agent any
+    tools {nodejs "node"}
+    stages {
+        stage ('clone repo') { //clone repo from github
+            steps{
+                git url: "https://github.com/Jesse-Richard/gallery.git", branch: "master"
+            }
+        }
+        stage ('Build') { //install npm
+            steps{
+                sh 'npm install'
+            }
+        }
+        stage ('Run tests') { //run npm test on cloned repo
+            steps{ 
+                echo 'Running Test...'
+                sh 'npm test' 
+            }
+        }
+        stage ('Deploy on Render') { //deploy on heroku
+            steps{ 
+               echo 'deploying...'
+
+            }
+        }
+    } 
+
+}
